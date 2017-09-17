@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="demoApp">
+<head>
+  <meta charset="utf-8" />
+  <title>Movies to see</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+<header>
+  <h1>Films à voir</h1>
+</header>
+
+<section ng-controller="movieCtrl">
+
+  <form ng-submit="addMovie()">
+    <input placeholder="Quel film souhaitez-vous regarder ?" ng-model="newMovie" />
+    <button ng-click="">Ajouter le film </button>
+  </form>
+
+  <article ng-show="movies.length">
+    <ul>
+      <li ng-repeat="movie in movies" ng-class="{completed: movie.completed}">
+        <div>
+          <input type="checkbox" ng-model="movie.completed" />
+          <span>{{movie.title}}</span>
+          <span ng-click="removeMovie(movie)">supprimer </span>
+        </div>
+      </li>
+    </ul>
+    <input type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" />
+    <label for="mark-all">Tout cocher</label>
+    <button ng-click="clearCompletedMovies()">Supprimer les films cochés</button>
+  </article>
+
+</section>
+
+<section>
+  <h2> Films vus </h2>
+
+  <form ng-submit="addMovie()">
+    <input placeholder="Films déjà vus" ng-model="" />
+    <button ng-click="">Ajouter le film </button>
+  </form>
+
+</section>
+</body>
+</html>
