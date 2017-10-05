@@ -1,4 +1,6 @@
-var demoApp = angular.module('demoApp', ['movieList']);
+var demoApp = angular.module('demoApp', [
+  'movieList'
+]);
 
 var movieList = angular.module('movieList',[]);
 
@@ -6,10 +8,9 @@ movieList.controller('movieCtrl', ['$scope',
   function ($scope) {
 
     var movies = $scope.movies = [];
-
-    // Ajouter un movie
+    $scope.newMovie = '';
     $scope.addMovie = function () {
-      var newMovie = $scope.newMovie();
+      newMovie = $scope.newMovie;
       if (!newMovie.length) {
         return;
       }
@@ -24,16 +25,42 @@ movieList.controller('movieCtrl', ['$scope',
       movies.splice(movies.indexOf(movie), 1);
     };
 
+    /********************Sélectionne tous les films************************************************/
     $scope.markAll = function (completed) {
       movies.forEach(function (movie) {
-        movie.completed = !completed;
+        movie.completed = completed;
       });
     };
-    
+    /********************Supprime les films séléctionnés********************************************************/
     $scope.clearCompletedMovies = function () {
       $scope.movies = movies = movies.filter(function (movie) {
         return !movie.completed;
       });
     };
+
+    /******************Permet de faire passer les films à voir dans les films vus ****************************/
+    $scope.filmVu = function (){
+      var vu = $scope.vu = [];
+      $scope.newMovie = newMovie;
+      vu.push({title: newMovie});
+    }
+
+    /******************Ajouter un film directement dans films vus********************************/
+    var films = $scope.films = [];
+    $scope.newFilm = '';
+    $scope.addFilm = function () {
+      console.log("addFilm");
+      newFilm = $scope.newFilm;
+
+      if (!newFilm.length) {
+        return;
+      }
+      films.push({
+        title: newFilm,
+        completed: false
+      });
+      $scope.newFilm = '';
+    };
+
   }
 ]);

@@ -24,7 +24,30 @@
         <div>
           <input type="checkbox" ng-model="movie.completed" />
           <span>{{movie.title}}</span>
-          <span ng-click="removeMovie(movie)">supprimer </span>
+          <span ng-click="removeMovie(movie)"> <br> supprimer </span>
+        </div>
+      </li>
+    </ul>
+    <input type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" />
+    <label for="mark-all">Tout cocher</label>
+    <button ng-click="filmVu()">J'ai déjà vu ce(s) film(s)</button>
+  </article>
+
+
+  <h2> Films vus </h2>
+
+  <form ng-submit="addFilm()">
+    <input placeholder="Films déjà vus" ng-model="newMovie" />
+    <button ng-click="">Ajouter le film </button>
+  </form>
+  <article ng-show="movies.length">
+    <ul>
+      <li ng-repeat="movie in vu">
+        <div>
+          <input type="checkbox" ng-model="film.completed" />
+          <span>{{movie.title}}</span>
+          <!-- <span> {{film.title}}</span>-->
+          <span ng-click="removeMovie(movie)"> <br> supprimer </span>
         </div>
       </li>
     </ul>
@@ -32,16 +55,6 @@
     <label for="mark-all">Tout cocher</label>
     <button ng-click="clearCompletedMovies()">Supprimer les films cochés</button>
   </article>
-
-</section>
-
-<section>
-  <h2> Films vus </h2>
-
-  <form ng-submit="addMovie()">
-    <input placeholder="Films déjà vus" ng-model="" />
-    <button ng-click="">Ajouter le film </button>
-  </form>
 
 </section>
 </body>
