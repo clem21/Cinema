@@ -1,66 +1,54 @@
+/*Déclaration de l'application demoApp*/
 var demoApp = angular.module('demoApp', [
+  // Dépendances du "module"
   'movieList'
 ]);
 
+/* Déclaration du module movieList */
 var movieList = angular.module('movieList',[]);
 
 movieList.controller('movieCtrl', ['$scope',
   function ($scope) {
 
+    // Pour manipuler plus simplement les movies au sein du contrôleur
+    // On initialise les movies avec un tableau vide : []
     var movies = $scope.movies = [];
-    $scope.newMovie = '';
+
+    // Ajouter un movie
     $scope.addMovie = function () {
-      newMovie = $scope.newMovie;
+      // .trim() permet de supprimer les espaces inutiles
+      // en début et fin d'une chaîne de caractères
+      var newMovie = $scope.newMovie.trim();
       if (!newMovie.length) {
+        // éviter les movies vides
         return;
       }
       movies.push({
+        // on ajoute le movie au tableau des movies
         title: newMovie,
         completed: false
       });
+      // Réinitialisation de la variable newMovie
       $scope.newMovie = '';
     };
 
+    // Enlever un movie
     $scope.removeMovie = function (movie) {
       movies.splice(movies.indexOf(movie), 1);
     };
 
-    /********************Sélectionne tous les films************************************************/
+    // Cocher / Décocher tous les movies
     $scope.markAll = function (completed) {
       movies.forEach(function (movie) {
-        movie.completed = completed;
+        movie.completed = !completed;
       });
     };
-    /********************Supprime les films séléctionnés********************************************************/
+
+    // Enlever tous les movies cochés
     $scope.clearCompletedMovies = function () {
       $scope.movies = movies = movies.filter(function (movie) {
         return !movie.completed;
       });
     };
-
-    /******************Permet de faire passer les films à voir dans les films vus ****************************/
-    $scope.filmVu = function (){
-      var vu = $scope.vu = [];
-      $scope.newMovie = newMovie;
-      vu.push({title: newMovie});
-    }
-
-    /******************Ajouter un film directement dans films vus********************************/
-    var films = $scope.films = [];
-    $scope.newFilm = '';
-    $scope.addFilm = function () {
-      console.log("addFilm");
-      newFilm = $scope.newFilm;
-
-      if (!newFilm.length) {
-        return;
-      }
-      films.push({
-        title: newFilm,
-        completed: false
-      });
-      $scope.newFilm = '';
-    };
-
   }
 ]);
