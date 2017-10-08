@@ -7,55 +7,57 @@
   <script src="main.js"></script>
 </head>
 <body>
-<header>
-  <h1>Films à voir</h1>
-</header>
+  <header>
+    <h1>Films à voir</h1>
+  </header>
 
-<section ng-controller="movieCtrl">
+    <section ng-controller="movieCtrl">
 
-  <form ng-submit="addMovie()">
-    <input placeholder="Quel film souhaitez-vous regarder ?" ng-model="newMovie" />
-    <button ng-click="">Ajouter le film </button>
-  </form>
+      <form ng-submit="addMovie()">
+        <input placeholder="Quel film souhaitez-vous regarder ?" ng-model="newMovie" />
+        <button ng-click="">Ajouter le film </button>
+      </form>
 
-  <article ng-show="movies.length">
-    <ul>
-      <li ng-repeat="movie in movies" ng-class="{completed: movie.completed}">
-        <div>
-          <input type="checkbox" ng-model="movie.completed" />
-          <span>{{movie.title}}</span>
-          <span ng-click="removeMovie(movie)"> <br> supprimer </span>
-        </div>
-      </li>
-    </ul>
-    <input type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" />
-    <label for="mark-all">Tout cocher</label>
-    <button ng-click="filmVu()">J'ai déjà vu ce(s) film(s)</button>
-  </article>
+      <article ng-show="movies.length">
+        <ul>
+          <li ng-repeat="movie in movies" >
+            <div>
+              <input type="checkbox" ng-model="movie.completed" />
+              <span>{{movie.title}}</span>
+              <span ng-click="removeMovie(movie)"> <br> Supprimer </span>
+            </div>
+          </li>
+        </ul>
+        <input type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" />
+        <label for="mark-all">Tout cocher</label>
+        <button ng-click="filmVu()">Déjà vus ces films</button>
+        <button ng-click="clearCompletedMovies()">Supprimer les films cochés</button>
+      </article>
 
 
-  <h2> Films vus </h2>
+      <h2> Films vus </h2>
 
-  <form ng-submit="addFilm()">
-    <input placeholder="Films déjà vus" ng-model="newMovie" />
-    <button ng-click="">Ajouter le film </button>
-  </form>
-  <article ng-show="movies.length">
-    <ul>
-      <li ng-repeat="movie in vu">
-        <div>
-          <input type="checkbox" ng-model="film.completed" />
-          <span>{{movie.title}}</span>
-          <!-- <span> {{film.title}}</span>-->
-          <span ng-click="removeMovie(movie)"> <br> supprimer </span>
-        </div>
-      </li>
-    </ul>
-    <input type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" />
-    <label for="mark-all">Tout cocher</label>
-    <button ng-click="clearCompletedMovies()">Supprimer les films cochés</button>
-  </article>
+      <form ng-submit="addFilm()">
+        <input placeholder="Films déjà vus" ng-model="newFilm" />
+        <button ng-click="">Ajouter le film </button>
+      </form>
+      <article ng-show="movies.length">
+        <ul>
+          <li ng-repeat="movie in vu">
+            <span>{{movie.title}}</span>
+          </li>
+        </ul>
+      </article>
+      <article ng-show="films.length">
+        <ul>
+          <li ng-repeat="film in films">
+            <div>
+              <span>{{film.title}}</span>
+            </div>
+          </li>
+        </ul>
+      </article>
 
-</section>
+    </section>
 </body>
 </html>
